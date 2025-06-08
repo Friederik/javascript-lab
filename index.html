@@ -12,13 +12,25 @@
     <title>JavaScript</title>
 </head>
 <body>
-    <div id="block" style="display: flex; gap: 50px;">
-        <div style="width: 200px; height: 200px; background-color: black;" class="item"></div>
-        <div style="width: 200px; height: 200px; background-color: black;" class="item"></div>
-        <div style="width: 200px; height: 200px; background-color: black;" class="item"></div>
-        <div style="width: 200px; height: 200px; background-color: black;" class="item"></div>
-        <div style="width: 200px; height: 200px; background-color: black;" class="item"></div>
+    <div class="container">
+        <input id="input" class="input" type="text">
+        <div id="list" class="list">
+            <article id="t-0" class="task">
+                <h2 class="task__header">Сделать дела</h2>
+                <div class="task__btns">
+                    <button id="release" class="task__btn task__btn--release">Выполнить</button>
+                    <button id="delete" class="task__btn task__btn--delete">Удалить</button>
+                </div>
+            </article>
+            <article id="t-0" class="task">
+                <h2 class="task__header">Сделать дела</h2>
+                <div class="task__btns">
+                    <button id="release" class="task__btn task__btn--release">Выполнить</button>
+                    <button id="delete" class="task__btn task__btn--delete">Удалить</button>
+                </div>
+            </article>
+            
+        </div>
     </div>
-
 </body>
 </html>

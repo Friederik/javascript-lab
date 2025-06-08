@@ -1,0 +1,69 @@
+body {
+    height: 100dvh;
+}
+
+.container {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.input {
+    width: 300px;
+    border: 2px solid brown;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+.input:focus {
+    outline: none;
+    border-color: orange;
+}
+
+.list {
+    width: 300px;
+    display: flex;
+    flex-direction: column;
+    padding-top: 2vh;
+    gap: 1vh;
+}
+
+.task {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5vh;
+    padding: 1vh;
+    border: 3px solid royalblue;
+    border-radius: 5px;
+}
+
+.task__header {
+    text-align: center;
+    font-size: 2rem;
+}
+
+.task__btns {
+    display: flex;
+    justify-content: center;
+    gap: 0.5vw;
+}
+
+.task__btn {
+    width: 100px;
+    color: white;
+    border-radius: 5px;
+}
+
+.task__btn--release {
+    background-color: green;
+}
+
+.task__btn--delete {
+    background-color: red;
+}
+
+.task__btn--released {
+    background-color: royalblue;
+}

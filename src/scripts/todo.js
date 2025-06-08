@@ -1,8 +1,13 @@
-const block = document.getElementById('block')
+const btn = document.getElementById('saveBtn')
+const input = document.getElementById('noteInput')
+const output = document.getElementById('output')
 
-block.addEventListener('click', (e) => {
-    if (e.target.classList.contains('item')) {
-        e.target.style.backgroundColor = 'green'
-        
-    }
+const buffer = JSON.parse(localStorage.getItem('name'))
+if (buffer) {
+    output.textContent = buffer
+}
+
+btn.addEventListener('click', () => {
+    localStorage.setItem('name', JSON.stringify(input.value))
+    output.textContent = input.value 
 })
