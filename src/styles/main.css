@@ -7,6 +7,7 @@ body {
     display: flex;
     flex-direction: column;
     justify-content: center;
+    gap: 2vh;
     align-items: center;
 }
 
@@ -26,7 +27,6 @@ body {
     width: 300px;
     display: flex;
     flex-direction: column;
-    padding-top: 2vh;
     gap: 1vh;
 }
 
@@ -37,6 +37,12 @@ body {
     padding: 1vh;
     border: 3px solid royalblue;
     border-radius: 5px;
+}
+
+.task--no-children {
+    background-color: black;
+    color: white;
+    border-color: red;
 }
 
 .task__header {
@@ -66,4 +72,8 @@ body {
 
 .task__btn--released {
     background-color: royalblue;
+}
+
+.task__btn--add {
+    background-color:purple;
 }
