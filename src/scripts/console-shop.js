@@ -2,6 +2,7 @@ const customer = {
     name: 'Гость',
     wallet: 200,
     purchases: [],
+    payment: 0
 }
 
 customer.name = prompt("Введите имя покупателя", "Гость")
@@ -27,11 +28,13 @@ const products = [
 
 function addProduct(pCount, pPos) {
     const p = products[pPos]
-    if (p.count > 0) {
+    if (pCount <= 0) return
+    if (p.count > 0 && pCount <= p.count) {
         const pPrice = p.price * pCount
         if (customer.wallet > pPrice) {
             customer.purchases.push({name: p.name, price: pPrice})
             customer.wallet -= pPrice
+            p.count -= pCount
             alert(`Вы добавили ${p.name} на ${pPrice}₽!`)
         } else {
             alert('Недостаточно средств.')
@@ -39,12 +42,17 @@ function addProduct(pCount, pPos) {
     } else {
         alert(`${p.name} кончились.`)
     }
-    console.log(customer.purchases);
-    
+}
+
+function calculatePayment() {
+    customer.payment = 0
+    for (p of customer.purchases) {
+        customer.payment += p.price
+    }
 }
 
 while (true) {
-    if (confirm(customer.name + `, желаете добавить товар в корзину? Доступные средства: ${customer.wallet}₽.`)) {
+    if (confirm(customer.name + `, желаете добавить товар в корзину? \nДоступные средства: ${customer.wallet}₽.`)) {
         let availableProducts = ''
         for (let p of products) {
             if (p.count > 0) availableProducts += `${p.name}, `
@@ -62,6 +70,8 @@ while (true) {
                 case 'Шоколад':
                     addProduct(prompt(`Количество товаров (цена - ${products[2].price}₽):`), 2)
                     break
+                default:
+
             }
         } else {
             alert("Товары кончились.")
@@ -74,6 +84,17 @@ while (true) {
     }
 }
 
-// while (true) {
-
-// }
+while (true) {
+    calculatePayment()
+    if (confirm(customer.name + `, желаете последний товар? \nДоступные средства: ${customer.wallet}₽. \nСумма чека: ${customer.payment}₽. \nКоличество товаров: ${customer.purchases.length}.`)) {
+        if (customer.purchases.length > 0) {
+            customer.wallet += customer.purchases.pop().price
+        } else {
+            alert(`Удаление кончилось. \nВаш чек: ${customer.payment}₽!`)
+            break
+        }
+    } else {
+        alert(`Удаление кончилось. \nВаш чек: ${customer.payment}₽!`)
+        break
+    }
+}
