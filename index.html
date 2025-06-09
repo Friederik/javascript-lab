@@ -14,6 +14,11 @@
 <body>
     <div class="container">
         <input id="input" class="input" type="text">
+        <select id="filter" class="input">
+            <option value="0" class="filter__item">Все</option>
+            <option value="1" class="filter__item">Выполненные</option>
+            <option value="2" class="filter__item">Активные</option>
+        </select>
         <button id="add-btn" class="task__btn task__btn--add">Добавить</button>
         <div id="list" class="list"></div>
     </div>

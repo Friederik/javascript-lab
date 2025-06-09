@@ -61,7 +61,9 @@ function renderTask(task) {
 function renderList() {
     const list = document.getElementById('list')
     list.innerHTML = ''
-    if (getLocal().length === 0) {
+    const allTasks = getLocal()
+
+    if (allTasks.length === 0) {
         const noTask = document.createElement('article')
         noTask.classList.add('task')
         noTask.classList.add('task--no-children')
@@ -69,9 +71,29 @@ function renderList() {
         noTask.textContent = "Добавьте задачи!"
         list.appendChild(noTask)
     } else {
-        for (let task of getLocal()) {
-            renderTask(task)
+        const selectedFilter = document.getElementById('filter')
+        console.log(selectedFilter.value);
+        
+        switch (selectedFilter.value) {
+            case '0':
+                for (let task of allTasks) {
+                    renderTask(task)
+                }  
+                break
+            case '1':
+                const filtredTasksTrue = allTasks.filter(task => task.isDone === true) 
+                for (let task of filtredTasksTrue) {
+                    renderTask(task)
+                }  
+                break     
+            case '2':
+                const filtredTasksFalse = allTasks.filter(task => task.isDone === false) 
+                for (let task of filtredTasksFalse) {
+                    renderTask(task)
+                }  
+                break 
         }
+        
     }
 
 }
@@ -96,6 +118,7 @@ function deleteTask(index) {
     const local = getLocal()
     const newLocal = local.filter(task => task.index !== index)
     saveLocal(newLocal)
+    renderList()
 }
 
 function changeTask(index) {
@@ -110,4 +133,5 @@ function changeTask(index) {
 
 
 document.getElementById('add-btn').addEventListener('click', addTask)
+document.getElementById('filter').addEventListener('change', renderList)
 renderList()
