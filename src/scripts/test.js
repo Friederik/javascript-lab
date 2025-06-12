@@ -112,17 +112,30 @@
 
 // console.log(b);
 
-'use strict'
-const user = {
-  name: 'Анна',
-  timeoutGreet() {
-    setTimeout(function() {
-      console.log('Голосом обычной:', this.name); // ?
-    }.bind(this), 100);
+// 'use strict'
+// const user = {
+//   name: 'Анна',
+//   timeoutGreet() {
+//     setTimeout(function() {
+//       console.log('Голосом обычной:', this.name); // ?
+//     }.bind(this), 100);
 
-    setTimeout(() => {
-      console.log('Голосом стрелочной:', this.name); // Анна
-    }, 200);
-  }
-};
-user.timeoutGreet();
+//     setTimeout(() => {
+//       console.log('Голосом стрелочной:', this.name); // Анна
+//     }, 200);
+//   }
+// };
+// user.timeoutGreet();
+
+
+// DATE
+
+
+// const newDates = [new Date('August 12, 2022'), new Date('July 25, 2001'), new Date('January 12, 2005')]
+
+// const sortedDates = newDates.sort((date1, date2) => date1.getTime() - date2.getTime())
+
+// sortedDates.forEach((date) => {
+//   console.log(date.toLocaleDateString());
+  
+// })
