@@ -92,11 +92,53 @@ function createQuest(argExp) {
         if (score.totalExp < score.nowExp) {
             console.log('Победа!')
         } else {
-            console.log(`${score.nowExp / score.totalExp * 100}% Выполнено!`);
+            console.log(`${(score.nowExp / score.totalExp * 100).toFixed(1)}% Выполнено!`);
         }
     }
 }
 
 const q = createQuest(200)
-q(2)
-q(5)
+
+
+// DATE
+
+class DateManager {
+    constructor() {
+        this.dates = []
+    }
+
+    addMeeting(title, dateTime) {
+        this.dates.push({
+            title: title,
+            dateTime: new Date(dateTime)
+        })
+    }
+
+    getSorted() {
+        return this.dates.sort((date1, date2) => date1.dateTime.getTime() - date2.dateTime.getTime())
+    }
+
+    getClosestMeeting() {
+        const now = new Date()
+        return this.getSorted().find(meeting => meeting.dateTime > now)
+    }
+
+    #getClosestMeetingTime() {
+        return new Date(this.getClosestMeeting().dateTime - new Date())
+    }
+
+    getClosestMeetingHours() {
+        return (this.#getClosestMeetingTime() / 1000 / 60 / 60).toFixed(0)
+    }
+
+    getClosestMeetingDays() {
+        return (this.#getClosestMeetingTime() / 1000 / 60 / 60 / 24).toFixed(0)
+    }
+}
+
+const meetings = new DateManager()
+meetings.addMeeting('День рождения', 'June 15, 2025, 12:00')
+meetings.addMeeting("Орган", 'June 19, 2025, 19:00')
+meetings.addMeeting('УП', 'June 18, 2025, 10:00')
+console.log(meetings.getClosestMeetingHours());
+console.log(meetings.getSorted());
