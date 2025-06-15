@@ -140,5 +140,139 @@ const meetings = new DateManager()
 meetings.addMeeting('День рождения', 'June 15, 2025, 12:00')
 meetings.addMeeting("Орган", 'June 19, 2025, 19:00')
 meetings.addMeeting('УП', 'June 18, 2025, 10:00')
-console.log(meetings.getClosestMeetingHours());
-console.log(meetings.getSorted());
+// console.log(meetings.getClosestMeetingHours());
+// console.log(meetings.getSorted());
+
+
+// MAP
+
+class VisitManager {
+    constructor() {
+        this.visits = new Map()
+    }
+
+    addVisit(userId, page) {
+        if (typeof userId !== 'number' || typeof page !== 'number') {
+            console.error("Incorrect Data");
+            return
+        }
+        if (!this.visits.has(userId)) {
+            this.visits.set(userId, [])
+        }
+        this.visits.get(userId).push(page)
+    }
+
+    getUserVisits(userId) {
+        if (this.visits.has(userId)) {
+            return this.visits.get(userId)
+        }
+    }
+
+    getMostActiveUser() {
+        let mostUserId = null
+        let maxVisits = -1
+
+        for (let [userId, pages] of this.visits.entries()) {
+            if (pages.length > maxVisits) {
+                mostUserId = userId
+                maxVisits = pages.length
+            }
+        }
+
+        return {
+            userId: mostUserId,
+            visits: maxVisits
+        }
+    }
+}
+
+const v = new VisitManager()
+
+v.addVisit(4, 6)
+v.addVisit(4, 2)
+
+v.addVisit(3, 1)
+v.addVisit(3, 2)
+v.addVisit(3, 4)
+
+v.addVisit(5, 5)
+v.addVisit(5, 5)
+
+v.addVisit(2, 1)
+v.addVisit(2, 2)
+v.addVisit(2, 3)
+v.addVisit(2, 4)
+
+v.addVisit(1, 1)
+v.addVisit(1, 3)
+
+// console.log(v.visits.size);
+
+
+// REGEXP
+
+// // Просто обычная функция
+// function loggerTag(strings, ...expressionValues) {
+//   console.log(strings)
+//   console.log(...expressionValues)
+// }
+
+// loggerTag`Булевых значений всего ${2}: они бывают либо ${true} либо ${false}`
+// // ['Булевых значений всего ', ': они бывают либо ', ' либо ', '']
+// // 2 true false
+
+
+class Validate {
+    static email(str) {
+        const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+        return regex.test(str)
+    }
+
+    static password(str) {
+        const regex = /^(?=.*\d)(?=.*[a-zA-Z])[a-zA-Z\d]{8,}$/
+        return regex.test(str)
+    }
+
+    static username(str) {
+        const regex = /^[а-яА-ЯЁё]{3,15}$/
+        return regex.test(str)
+    }
+}
+
+// console.log(Validate.password('123'));
+// console.log(Validate.password('afe'));
+// console.log(Validate.password('123f'));
+// console.log(Validate.password('1234567A'));
+
+
+// console.log(Validate.email('123@1232.com'));
+// console.log(Validate.email('12@3@.'));
+// console.log(Validate.email('1..2@3'));
+
+// console.log(Validate.username('Илья'));
+// console.log(Validate.username('Илья2'));
+// console.log(Validate.username('Hikolay'));
+
+
+// THIS
+
+function createStore(startDiscount = 20) {
+    let discount = startDiscount
+    console.log(`Установлена скидка: ${discount}%`);
+    
+    return  {
+        setDiscount(newDiscount) {
+            discount = newDiscount
+            console.log(`Установлена скидка: ${discount}%`);
+        },
+        getPrice(price) {
+            return (price * (100 - discount) / 100).toFixed(2)
+        }
+    }
+}
+
+const store = createStore()
+
+console.log(store.getPrice(200));
+store.setDiscount(30)
+console.log(store.getPrice(200));
